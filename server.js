@@ -56,6 +56,18 @@ app.engine('jsx', require('jsx-view-engine').createEngine());
 //     res.render('Fruits/Index')
 // });
 
+app.get('/fruits', (req, res) => {
+    Fruit.find({}, (error, allFruits) => {
+        res.render('fruits/Index', {
+            fruits: allFruits
+        });
+    });
+});
+
+
+
+
+
 // DELETE
 app.delete('/fruits/:id', (req, res)=>{
     Fruit.findByIdAndRemove(req.params.id, (err, data)=>{
@@ -119,13 +131,7 @@ app.get('/fruits/seed', (req, res)=>{
 
 
 // GET
-app.get('/fruits', (req, res) => {
-    Fruit.find({}, (error, allFruits) => {
-        res.render('fruits/Index', {
-            fruits: allFruits
-        });
-    });
-});
+
 
 // Create a new route and page
 app.get('/fruits/new', (req, res) => { // New is a form
